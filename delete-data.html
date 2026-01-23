@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0088FF" />
+
+  <title>Eureki — Pedido de eliminação de dados</title>
+  <meta name="description" content="Como pedir eliminação de dados na app Eureki (notas, histórico de chat e outros dados associados) sem apagar a conta." />
+
+  <style>
+    :root{
+      --primary:#0088FF;
+      --bg:#ffffff;
+      --surface:#F5F7FA;
+      --text:#1C1C1C;
+      --muted:#5A5A5A;
+      --border:#E1E5EA;
+      --ok:#22C55E;
+      --warn:#F59E0B;
+
+      --r-sm:12px;
+      --r-md:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+
+      --max: 980px;
+      --p: 18px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0B0F14;
+        --surface:#101823;
+        --text:#EAECEF;
+        --muted:#AAB3BD;
+        --border:#1F2A36;
+        --shadow: 0 10px 30px rgba(0,0,0,.35);
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(0,136,255,.18), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(0,136,255,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{ color:var(--primary); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px 18px 64px;
+    }
+
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 22px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--surface) 82%, transparent);
+      border-radius:999px;
+      width: fit-content;
+      box-shadow: var(--shadow);
+    }
+
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 25%, transparent);
+      flex:0 0 auto;
+    }
+
+    h1{
+      margin: 10px 0 0;
+      font-size: clamp(26px, 2.5vw, 38px);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle{
+      margin: 4px 0 0;
+      color:var(--muted);
+      font-size: 15px;
+    }
+
+    .card{
+      background: color-mix(in oklab, var(--surface) 92%, transparent);
+      border:1px solid var(--border);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-top: 14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+
+    @media (min-width: 900px){
+      .grid{
+        grid-template-columns: 1.2fr .8fr;
+        align-items:start;
+      }
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    p, li{
+      color: color-mix(in oklab, var(--text) 92%, var(--muted));
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    ul{
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+
+    .steps{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .step{
+      display:flex;
+      gap:12px;
+      padding: 12px 12px;
+      border:1px solid var(--border);
+      border-radius: var(--r-sm);
+      background: color-mix(in oklab, var(--bg) 60%, transparent);
+    }
+
+    .n{
+      width:28px; height:28px;
+      border-radius: 10px;
+      background: color-mix(in oklab, var(--primary) 18%, transparent);
+      border:1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--primary);
+      font-weight: 700;
+      flex:0 0 auto;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding: 8px 12px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+      margin: 10px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .ok{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--ok) 25%, transparent);
+    }
+
+    .warn{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--warn);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--warn) 25%, transparent);
+    }
+
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border:1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+      background: color-mix(in oklab, var(--primary) 12%, var(--bg));
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration:none;
+    }
+
+    .btn:hover{
+      filter: brightness(1.05);
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      background: var(--primary);
+      border-color: color-mix(in oklab, var(--primary) 90%, black);
+      color: white;
+    }
+
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--bg) 70%, transparent);
+    }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .fine{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .hr{
+      height:1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge">
+          <span class="dot" aria-hidden="true"></span>
+          <strong>Eureki</strong>
+          <span style="color:var(--muted)">•</span>
+          <span style="color:var(--muted)">Eliminação de dados</span>
+        </div>
+        <h1>Pedido de eliminação de dados (sem apagar a conta)</h1>
+        <p class="subtitle">
+          Aqui encontras as opções para eliminar dados na app (ex.: notas, histórico de chat), mantendo a tua conta ativa.
+        </p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>O que podes eliminar</h2>
+        <ul>
+          <li><strong>Notas</strong> criadas na app.</li>
+          <li><strong>Histórico de chat</strong> (conversas com a mentora).</li>
+          <li><strong>Dados de progresso/objetivo</strong> (ex.: objetivo atual, preferências, micro-passos guardados).</li>
+          <li><strong>Conteúdo criado pelo utilizador</strong> dentro da app (quando aplicável).</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <h2>Como eliminar dentro da app (recomendado)</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="n">1</div>
+            <div>
+              <p><strong>Eliminar histórico do chat</strong></p>
+              <p>Abre o chat → menu (⋯) → <strong>Apagar histórico</strong>.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">2</div>
+            <div>
+              <p><strong>Eliminar notas</strong></p>
+              <p>Vai a Notas → seleciona uma nota → <strong>Apagar</strong> (ou “Apagar tudo” se existir essa opção).</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">3</div>
+            <div>
+              <p><strong>Eliminar dados do objetivo/progresso</strong></p>
+              <p>Vai a Definições → <strong>Privacidade / Dados</strong> → <strong>Apagar dados do objetivo</strong> (o nome da opção pode variar).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pill" role="note" aria-label="Nota">
+          <span class="ok" aria-hidden="true"></span>
+          <span>Eliminar dados na app é imediato e não requer contacto com suporte.</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <h2>Se não conseguires eliminar na app</h2>
+        <p>
+          Podes pedir a eliminação de dados por email. Para acelerar o processo, envia:
+        </p>
+        <ul>
+          <li>Assunto: <code>Pedido de eliminação de dados — Eureki</code></li>
+          <li>O email da conta (ou o método de login usado: Google, email/password).</li>
+          <li>O que queres apagar: <code>chat</code>, <code>notas</code>, <code>progresso</code>, ou <code>tudo exceto conta</code>.</li>
+          <li>Opcional: uma breve descrição (ex.: “apagar todas as notas e histórico de chat”).</li>
+        </ul>
+
+        <div class="cta">
+          <a class="btn primary" href="mailto:support@eureki.app?subject=Pedido%20de%20elimina%C3%A7%C3%A3o%20de%20dados%20%E2%80%94%20Eureki&body=Ol%C3%A1%20equipa%20Eureki%2C%0A%0APretendo%20eliminar%20os%20seguintes%20dados%20da%20minha%20conta%3A%20%5Bchat%2Fnotas%2Fprogresso%2Ftudo%20exceto%20conta%5D.%0A%0AEmail%20da%20conta%3A%20%5Bteu%20email%5D%0A%0AObrigado." aria-label="Enviar email para suporte">
+            Enviar email para suporte
+          </a>
+          <a class="btn" href="./delete-account.html">
+            Quero apagar a conta (e tudo)
+          </a>
+        </div>
+
+        <p class="fine">
+          Importante: por motivos de segurança, poderemos pedir confirmação adicional para garantir que és o titular da conta.
+        </p>
+      </div>
+
+      <aside class="card">
+        <h2>Prazos e retenção</h2>
+        <p>
+          Quando eliminas dados na app, a remoção é imediata no dispositivo e, quando aplicável,
+          é propagada para os sistemas associados.
+        </p>
+        <p>
+          Em pedidos feitos por email, o tratamento pode requerer validação do titular.
+        </p>
+
+        <div class="pill" role="note" aria-label="Nota sobre conformidade">
+          <span class="warn" aria-hidden="true"></span>
+          <span>Alguns registos técnicos (ex.: falhas/crashes) podem ser mantidos por um período limitado para segurança/diagnóstico.</span>
+        </div>
+
+        <div class="hr"></div>
+
+        <h2>Entidade responsável</h2>
+        <p><strong>Eureki Unipessoal Lda</strong></p>
+        <p>Olhão, Portugal</p>
+        <p>Contacto: <a href="mailto:support@eureki.app">support@eureki.app</a></p>
+
+        <div class="hr"></div>
+
+        <h2>Versão desta página</h2>
+        <p>
+          Última atualização: <span id="lastUpdated">2026-01-23</span>
+        </p>
+        <p class="fine">
+          Esta página existe para cumprir requisitos de transparência e para dar controlo ao utilizador sobre os seus dados.
+        </p>
+      </aside>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Eureki Unipessoal Lda • Olhão, Portugal • <a href="mailto:support@eureki.app">support@eureki.app</a>
+    </footer>
+  </main>
+
+  <script>
+    // Ano automático no footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
