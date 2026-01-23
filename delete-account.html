@@ -2,162 +2,182 @@
 <html lang="pt-PT">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eureki — Eliminar Conta e Dados</title>
-  <meta name="description" content="Como pedir a eliminação da conta e dados associados na app Eureki." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eureki — Eliminar conta</title>
+  <meta name="description" content="Como eliminar a sua conta Eureki e os respetivos dados." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --primary:#0088FF;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --bg:#ffffff;
-      --card:#f7f9fc;
-      --border:#e5e7eb;
+      --text:#373737;
+      --muted:#6B7280;
+      --border:#E1E5EA;
+      --surface:#FFFFFF;
+      --bg:#F7F8FA;
       --radius:16px;
-      --max:860px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
     }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
+      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
-      line-height:1.55;
+      background:linear-gradient(180deg,#0B1220 0%, #0B1220 220px, var(--bg) 220px);
     }
     header{
-      background: linear-gradient(135deg, rgba(0,136,255,.10), rgba(0,136,255,.02));
-      border-bottom:1px solid var(--border);
+      padding:56px 16px 28px;
+      text-align:center;
+      color:#fff;
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px;}
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:700; letter-spacing:.2px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(6px);
     }
     .dot{
-      width:14px; height:14px; border-radius:999px; background:var(--primary);
-      box-shadow:0 10px 24px rgba(0,136,255,.25);
+      width:12px;height:12px;border-radius:999px;background:var(--primary);
+      box-shadow:0 0 0 6px rgba(0,136,255,.18);
     }
-    h1{margin:14px 0 6px; font-size:28px;}
-    p.lead{margin:0; color:var(--muted);}
-    .grid{
-      display:grid; gap:14px;
-      grid-template-columns: 1fr;
-      margin-top:18px;
+    h1{
+      margin:18px 0 8px;
+      font-size:28px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+    header p{
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+    }
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:0 16px 56px;
     }
     .card{
-      background:var(--card);
+      background:var(--surface);
       border:1px solid var(--border);
       border-radius:var(--radius);
-      padding:16px 16px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      margin-top:16px;
     }
-    h2{margin:0 0 8px; font-size:18px;}
-    ul{margin:8px 0 0 18px;}
-    code{
-      background:#eef6ff;
-      border:1px solid #d7eaff;
-      padding:2px 6px;
-      border-radius:8px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: .95em;
+    h2{
+      margin:0 0 10px;
+      font-size:18px;
     }
-    a{color:var(--primary); text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .footer{color:var(--muted); font-size:13px; margin-top:18px;}
-    .badge{
+    p{margin:10px 0; font-size:14px; line-height:1.55}
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; font-size:14px; line-height:1.55}
+    .muted{color:var(--muted)}
+    .pill{
       display:inline-block;
-      padding:4px 10px;
-      border:1px solid var(--border);
+      padding:6px 10px;
       border-radius:999px;
-      background:#fff;
+      background:rgba(0,136,255,.10);
+      color:var(--primary);
+      font-weight:600;
+      font-size:12px;
+    }
+    .divider{
+      height:1px;background:var(--border);margin:16px 0;
+    }
+    a{color:var(--primary);text-decoration:none}
+    a:hover{text-decoration:underline}
+    footer{
+      text-align:center;
+      padding:18px 16px 40px;
       color:var(--muted);
       font-size:12px;
-      margin-top:10px;
+    }
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      background:#F3F4F6;
+      border:1px solid #E5E7EB;
+      padding:2px 6px;
+      border-radius:8px;
+      font-size:12px;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="wrap">
-      <div class="brand"><span class="dot"></span> Eureki</div>
-      <h1>Eliminar conta e dados</h1>
-      <p class="lead">
-        Esta página explica como podes pedir a eliminação da tua conta Eureki e dos dados associados.
-      </p>
-      <div class="badge">Última atualização: 2026-01-22</div>
+    <div class="brand" aria-label="Eureki">
+      <span class="dot" aria-hidden="true"></span>
+      <strong>Eureki</strong>
     </div>
+    <h1>Eliminar conta</h1>
+    <p>Instruções para eliminar a sua conta e os dados associados.</p>
   </header>
 
-  <main class="wrap">
-    <div class="grid">
-      <section class="card">
-        <h2>1) Como pedir a eliminação</h2>
-        <p>
-          Envia um email para <a href="mailto:support@eureki.app">support@eureki.app</a> com o assunto:
-          <code>Pedido de eliminação de conta</code>.
-        </p>
-        <p>No corpo do email, inclui:</p>
-        <ul>
-          <li>O email da conta (ou o método usado para entrar, ex.: Google).</li>
-          <li>Se possível, uma captura de ecrã da página de Definições (para ajudar a identificar a conta).</li>
-          <li>Opcional: o que pretendes eliminar (tudo, ou apenas certos dados).</li>
-        </ul>
-      </section>
+  <main>
+    <section class="card">
+      <span class="pill">Opção recomendada</span>
+      <h2>Eliminar a conta por email</h2>
+      <p>
+        Envie um email para <a href="mailto:support@eureki.app">support@eureki.app</a> com o assunto:
+        <code>Pedido de eliminação de conta</code>
+      </p>
+      <p>Inclua no corpo do email:</p>
+      <ul>
+        <li>O email da conta com que inicia sessão (ex.: Google)</li>
+        <li>Se quiser, uma nota: <span class="muted">“Eliminar tudo”</span> (conta + conteúdo)</li>
+      </ul>
 
-      <section class="card">
-        <h2>2) O que é eliminado</h2>
-        <p>Quando aprovada a eliminação, removemos (quando aplicável):</p>
-        <ul>
-          <li>Conta e identificação associada (ex.: email / ID de utilizador).</li>
-          <li>Objetivos, micro-passos, progresso e estados de tarefas.</li>
-          <li>Notas criadas na app.</li>
-          <li>Histórico de interações (ex.: chat), quando armazenado nos nossos sistemas.</li>
-          <li>Preferências básicas (ex.: idioma, configurações).</li>
-        </ul>
-      </section>
+      <div class="divider"></div>
 
-      <section class="card">
-        <h2>3) O que pode ser mantido por mais tempo</h2>
-        <p>
-          Podemos manter por um período limitado alguns registos técnicos mínimos (ex.: logs de segurança e
-          prevenção de abuso/fraude) quando necessário para:
-        </p>
-        <ul>
-          <li>Segurança, integridade do serviço e deteção de abusos.</li>
-          <li>Cumprimento de obrigações legais.</li>
-          <li>Resolução de incidentes técnicos.</li>
-        </ul>
-        <p>
-          Esses registos são mantidos apenas pelo tempo estritamente necessário e não são usados para fins
-          publicitários.
-        </p>
-      </section>
+      <p class="muted">
+        Nota: se no futuro existir um botão “Eliminar conta” dentro da app, esse método continuará válido — o email serve sempre como alternativa.
+      </p>
+    </section>
 
-      <section class="card">
-        <h2>4) Prazo</h2>
-        <p>
-          Tentamos concluir pedidos de eliminação o mais rápido possível. Prazo típico:
-          <strong>até 30 dias</strong>.
-        </p>
-      </section>
+    <section class="card">
+      <h2>O que é eliminado</h2>
+      <p>Quando a eliminação é concluída, são removidos (quando aplicável):</p>
+      <ul>
+        <li>Conta de utilizador (credenciais/identificador de autenticação)</li>
+        <li>Perfil (ex.: nome) e objetivo(s)</li>
+        <li>Notas e conteúdo criado pelo utilizador</li>
+        <li>Histórico de chat e mensagens na app</li>
+      </ul>
+      <p class="muted">
+        Se existirem dados guardados localmente no dispositivo, podem também ter de ser apagados ao desinstalar a app.
+      </p>
+    </section>
 
-      <section class="card">
-        <h2>5) Eliminação parcial (sem apagar a conta)</h2>
-        <p>
-          Se quiseres eliminar apenas parte dos dados (por exemplo, notas ou histórico), indica isso no teu email.
-          Se a funcionalidade existir diretamente na app, podes também fazê-lo por lá.
-        </p>
-      </section>
+    <section class="card">
+      <h2>O que pode ser retido</h2>
+      <p class="muted">
+        Poderemos reter informação estritamente necessária para cumprir obrigações legais, segurança e prevenção de abuso (por exemplo, registos mínimos de auditoria),
+        pelo tempo exigido por lei ou necessário para proteção do serviço.
+      </p>
+    </section>
 
-      <section class="card">
-        <h2>Contacto</h2>
-        <p>
-          Suporte: <a href="mailto:support@eureki.app">support@eureki.app</a>
-        </p>
-        <p class="footer">
-          Eureki é uma app de desenvolvimento pessoal. Esta página é informativa e pode ser atualizada.
-        </p>
-      </section>
-    </div>
+    <section class="card">
+      <h2>Responsável pelo serviço</h2>
+      <p><strong>Eureki Unipessoal Lda</strong></p>
+      <p class="muted">Olhão, Portugal</p>
+      <p>
+        Suporte: <a href="mailto:support@eureki.app">support@eureki.app</a>
+      </p>
+    </section>
   </main>
+
+  <footer>
+    © <span id="y"></span> Eureki Unipessoal Lda · Olhão, Portugal · support@eureki.app
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
